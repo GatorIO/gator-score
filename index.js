@@ -3,19 +3,18 @@
  * MIT Licensed
  */
 
-module.exports = getProfile;
-
 /*
-    Get a profile.
-    Returns:
-    1) An error object if one occurs
-    2) The profile object
+ Get a user profile.
+ Returns:
+ 1) An error object if one occurs
+ 2) The profile object
  */
-function getProfile(params, callback) {
+
+module.exports = function(params, callback) {
 
     try {
 
-        var query = '?ip=' + params.ip, path = '/profile';
+        var query = '?ip=' + params.ip, path = '/v1/profile';
 
         //  get an access token for full access at www.gator.io
         if (params.accessToken) {
@@ -27,11 +26,11 @@ function getProfile(params, callback) {
         }
 
         if (params.ua)
-            query += 'ua=' + encodeURIComponent(params.ua);
+            query += '&ua=' + encodeURIComponent(params.ua);
 
         //  referrer is used to get search engine, keywords and some quality info
         if (params.referrer)
-            query += 'referrer=' + encodeURIComponent(params.referrer);
+            query += '&referrer=' + encodeURIComponent(params.referrer);
 
         const https = require('https');
 
@@ -44,8 +43,14 @@ function getProfile(params, callback) {
 
         var req = https.request(options, function(res) {
 
-            res.on('data', function(d) {
-                callback(null, d);
+            var result = '';
+
+            res.on('data', function(chunk) {
+                result += chunk;
+            });
+
+            res.on('end', function() {
+                callback(null, JSON.parse(result));
             });
         });
         req.end();
@@ -56,5 +61,5 @@ function getProfile(params, callback) {
     } catch(err) {
         callback(err);
     }
-}
+};
 
