@@ -1,0 +1,14 @@
+.idea/
+node_modules
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Users Environment Variables
+.lock-wscript
+
+!**/public/**

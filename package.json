@@ -1,0 +1,44 @@
+{
+    "name": "gator-profile",
+    "description": "Get a fraud score, geolocation, device, demographic, search and technology data based on an IP address, user agent and referrer.",
+    "version": "1.0.0",
+    "author": {
+        "name": "GatorIO"
+    },
+    "main": "index.js",
+    "contributors": [
+        {
+            "name": "Phil Vizzaccaro",
+            "email": "phil@gator.io"
+        }
+    ],
+    "engines": {
+        "node": ">=0.10"
+    },
+    "bugs": {
+        "url": "https://github.com/GatorIO/gator-profile/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/GatorIO/gator-profile.git"
+    },
+    "keywords": [
+        "user",
+        "visitor",
+        "fraud",
+        "detection",
+        "geolocation",
+        "demographic",
+        "search engine",
+        "keywords",
+        "search terms",
+        "browser",
+        "platform",
+        "device",
+        "mobile",
+        "bot",
+        "proxy",
+        "hidden"
+    ],
+    "license" : "MIT"
+}
