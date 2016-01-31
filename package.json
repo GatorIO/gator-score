@@ -1,6 +1,6 @@
 {
-    "name": "gator-profile",
-    "description": "Get a fraud score, geolocation, device, demographic, search and technology data based on an IP address, user agent and referrer.",
+    "name": "gator-score",
+    "description": "Realtime API to get a user's fraud score, geolocation, device, demographic, search and technology data based on an IP address, user agent and referrer.",
     "version": "1.0.0",
     "author": {
         "name": "GatorIO"
@@ -16,11 +16,11 @@
         "node": ">=0.10"
     },
     "bugs": {
-        "url": "https://github.com/GatorIO/gator-profile/issues"
+        "url": "https://github.com/GatorIO/gator-score/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/GatorIO/gator-profile.git"
+        "url": "https://github.com/GatorIO/gator-score.git"
     },
     "keywords": [
         "user",
@@ -38,7 +38,12 @@
         "mobile",
         "bot",
         "proxy",
-        "hidden"
+        "hidden",
+        "score",
+        "publisher",
+        "ad",
+        "content",
+        "optimization"
     ],
     "license" : "MIT"
 }
