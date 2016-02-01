@@ -28,7 +28,7 @@ app.get('/test', function (req, res) {
         ip: req.ip,
         ua: req.headers['user-agent'],
         referrer: req.headers['referer'],
-        url: req.host
+        url: req.hostname
     };
 
     gator.score(options, function(err, result) {
