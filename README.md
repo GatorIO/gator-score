@@ -2,7 +2,16 @@
 
 [gator-score](https://gator.io) is a realtime API to get a user's fraud score, geolocation, device, demographic, search and technology data based on an IP address, user agent and referrer.  
 
+A fraud score is a number from 0-1000 which indicates the likelyhood that the user is a bot.  A score less than 100 means it is very likely the user is a bot.
+
+We use various methods to determine the fraud score, see our [methodology](https://gator.io/how).
+
+In addition, the API returns all the detectable information on the user, like the device, geolocation, etc.  This data is aggregated and available for reporting for account holders.
+
 The API uses a REST interface, so it can be used from any platform.
+
+## Free version
+There is a free version available that is rate-limited.  No access token is required for the free version.
 
 # Usage
 
