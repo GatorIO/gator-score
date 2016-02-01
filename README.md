@@ -64,14 +64,71 @@ __Arguments__
     * `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website.
 * `callback(err, result)`
     * `err` The error object has the following format:
-        * `code` a REST code.  200 means OK.  All others indicate some kind of failure.
+        * `code` an HTTP status code.  200 means OK.  All others indicate some kind of failure.
         * `message` the associated error message.
     * `result` The user score object.
+
+## Example result
+```javascript
+{
+  "code": 200,                          //  the HTTP status code - 200 means OK
+  "data": {
+    "score": 520,                       //  a score less than 100 indicates a very high likelyhood of a bot or an invalid user
+    "offense": null,                    //  this identifies the primary reason a user has a low score (colocation, collusion, etc.)
+    "organization": "Acme, Inc.",       //  the company, ISP, school or governmental agency of the user
+    "searchInfo": {                     //  we detect over 200 search engines
+      "group": "Bing",
+      "name": "Bing",
+      "keys": "bicycles"
+    },
+    "campaign": "BingAds",              //  the pay version aggregates on dozens of attributes, including campaign, source, publisher id,
+                                        //  medium, channel, etc.
+
+    "deviceType": "Mobile",             //  can also be desktop/laptop, tablet, console, TV and handheld.
+    "platformVersion": "iOS 9.2",
+    "platform": "iOS",
+    "isUniversity": false,              //  whether the user is within a university's netblock
+    "geolocation": {                    //  I.P. based geolocation for web users - this is 100% accurate to the country and
+                                        //  roughly 85% accurate to the postal code level.
+      "countryCode": "US",
+      "countryName": "United States",
+      "region": "CA",
+      "city": "Laguna Niguel",
+      "postalCode": "92677",
+      "latitude": 33.5351,
+      "longitude": -117.7052,
+      "dmaCode": 803,                   //  a Designated Market Area (DMA) is a group of counties in the United States that are
+                                        //  covered by a specific group of television stations.
+      "areaCode": 949,
+      "continentCode": "NA",
+      "regionName": "California"
+    },
+    "demographics": {                   //  these are demographics for the postal code the user is in
+      "medianHouseholdIncome": 112620,
+      "averageHomeValue": 798918,
+      "percentWhite": 77.56,
+      "percentBlack": 1.44,
+      "percentHispanic": 15.81,
+      "percentAsian": 10.24,
+      "percentFemale": 51.35,
+      "percent0_14": 21.4,
+      "percent15_24": 12.1,
+      "percent25_34": 10,
+      "percent35_44": 15.3,
+      "percent45_54": 18.3,
+      "percent55_64": 12.7,
+      "percent65Over": 10.1
+    },
+    "browserVersion": "Safari",
+    "browser": "Safari",
+    "status": "This result was delayed intentionally as part of the free version.  Create an account at www.gator.io for full speed access."
+  }
+}```
 
 ## Endpoints
 We are creating global endpoints for this API.  The API is extremely fast, however we cannot control latency on the internet.  To address this, we support colocation or replication to your cloud provider's site.  Please [contact us](https://gator.io) to set this up.
 
-## Sample Use Cases
+## Sample use cases
 - `Ads`	Do not display ads to invalid users. Keep your reputation as a publisher intact.
 - `Content Optimization`	Tailor your content based on a user's geo, demo or device type.
 - `Offers`	Base offers on search terms, or user's demographic.
