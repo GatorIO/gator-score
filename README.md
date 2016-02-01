@@ -5,7 +5,8 @@ agent and referrer.
 
 # Usage
 
-## Server Side Scoring
+## Server side scoring
+See full [documentation](https://gator.io/developer/scoring).
 ```javascript
 app.get('/test', function (req, res) {
     gator.score(options, function(err, result) {
