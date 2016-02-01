@@ -51,24 +51,22 @@ See full [documentation](https://gator.io/developer/scoring).
 
 ### score(options, [callback])
 
-Applies the function `iterator` to each item in `arr`, in parallel.
-The `iterator` is called with an item from the list, and a callback for when it
-has finished. If the `iterator` passes an error to its `callback`, the main
-`callback` (for the `each` function) is immediately called with the error.
+Scores the user and returns the result in the callback.
 
-__Options__
+__Arguments__
 
-* `accessToken` The access token for the call that you can get from a gator.io account.  Leave this blank for the free version, which is rate limited.
-* `ip` The IP address of the user.
+* `options` An object containing the scoring parameters: 
+** `accessToken` The access token for the call that you can get from a gator.io account.  Leave this blank for the free version, which is rate limited.
+** `ip` The IP address of the user.
 * `ua` The user agent of the user.
 * `referrer` The user's referrer.
 * `url` The url of your site the user is on
 * `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website.
 
-# Endpoints
+## Endpoints
 We are creating global endpoints for this API.  The API is extremely fast, however we cannot control latency on the internet.  To address this, we support colocation or replication to your cloud provider's site.  Please [contact us](https://gator.io) to set this up.
 
-# Sample Use Cases
+## Sample Use Cases
 - `Ads`	Do not display ads to invalid users. Keep your reputation as a publisher intact.
 - `Content Optimization`	Tailor your content based on a user's geo, demo or device type.
 - `Offers`	Base offers on search terms, or user's demographic.
