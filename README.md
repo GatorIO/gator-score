@@ -6,7 +6,6 @@ agent and referrer.
 # Usage
 
 ## Server side scoring
-See full [documentation](https://gator.io/developer/scoring).
 ```javascript
 
 var gator = require('gator-score');
@@ -31,6 +30,7 @@ app.get('/test', function (req, res) {
     });
 });
 ```
+See full [documentation](https://gator.io/developer/scoring).
 
 # Installation
 
