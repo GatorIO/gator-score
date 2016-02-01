@@ -1,11 +1,12 @@
 ![gator-score](https://gator.io/images/logo-light-background.png "gator-score")
 
-[gator-score](https://gator.io) is a realtime API to get a user's fraud score, geolocation, device, demographic, search and technology data based on an IP address, user
-agent and referrer.
+[gator-score](https://gator.io) is a realtime API to get a user's fraud score, geolocation, device, demographic, search and technology data based on an IP address, user agent and referrer.  
+
+The API uses a REST interface, so it can be used from any platform.
 
 # Usage
 
-## Server side scoring
+## Server side scoring in Node.js
 ```javascript
 
 var gator = require('gator-score');
@@ -42,10 +43,17 @@ See full [documentation](https://gator.io/developer/scoring).
 - `ua` The user agent of the user.
 - `referrer` The user's referrer.
 - `url` The url of your site the user is on
-- `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website. 
+- `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website.
  
 # Endpoints
 We are creating global endpoints for this API.  The API is extremely fast, however we cannot control latency on the internet.  To address this, we support colocation or replication to within your cloud provider's site.  Please [contact us](https://gator.io) to set this up.
+
+# Sample Use Cases
+- `Ads`	Do not display ads to invalid users. Keep your reputation as a publisher intact.
+- `Content Optimization`	Tailor your content based on a user's geo, demo or device type.
+- `Offers`	Base offers on search terms, or user's demographic.
+- `Publisher Networks`	See which publishers have the best and worst traffic.
+- `Save bandwidth`	Why stream videos to bots?
 
 ## License
 
