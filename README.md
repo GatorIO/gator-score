@@ -8,20 +8,26 @@ agent and referrer.
 ## Server side scoring
 See full [documentation](https://gator.io/developer/scoring).
 ```javascript
+
+var gator = require('gator-score');
+
+//  Example - within an express route
 app.get('/test', function (req, res) {
+
+    var options = {
+        accessToken: '',                    //  leave blank for free version
+        ip: req.ip,                         //  the IP address of the user
+        ua: req.headers['user-agent'],      //  the user agent of the user
+        referrer: req.headers['referer'],   //  the user's referrer
+        url: req.host                       //  the url of your site the user is on
+    };
+
     gator.score(options, function(err, result) {
 
-        if (err)
-            result = err;
-        else if (!result)
-            result = { code: 500, message: 'No result returned' };
-
-        res.render('scoringTest',{
-            settings: utils.config.settings(),
-            application: application,
-            req: req,
-            result: result
-        });
+        if (!err && result && result.score < 100) 
+            res.render('botContent');
+        else
+            res.render('humanContent');
     });
 });
 ```
