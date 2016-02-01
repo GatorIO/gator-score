@@ -56,12 +56,17 @@ Scores the user and returns the result in the callback.
 __Arguments__
 
 * `options` An object containing the scoring parameters: 
-** `accessToken` The access token for the call that you can get from a gator.io account.  Leave this blank for the free version, which is rate limited.
-** `ip` The IP address of the user.
-* `ua` The user agent of the user.
-* `referrer` The user's referrer.
-* `url` The url of your site the user is on
-* `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website.
+    * `accessToken` The access token for the call that you can get from a gator.io account.  Leave this blank for the free version, which is rate limited.
+    * `ip` The IP address of the user.
+    * `ua` The user agent of the user.
+    * `referrer` The user's referrer.
+    * `url` The url of your site the user is on
+    * `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website.
+* `callback(err, result)`
+    * `err` The error object has the following format:
+        * `code` a REST code.  200 means OK.  All others indicate some kind of failure.
+        * `message` the associated error message.
+    * `result` The user score object.
 
 ## Endpoints
 We are creating global endpoints for this API.  The API is extremely fast, however we cannot control latency on the internet.  To address this, we support colocation or replication to your cloud provider's site.  Please [contact us](https://gator.io) to set this up.
