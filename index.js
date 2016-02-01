@@ -80,7 +80,12 @@ module.exports = {
                     if (!aborted) {
 
                         try {
-                            callback(null, JSON.parse(result));
+                            result = JSON.parse(result);
+
+                            if (result.code == 200)
+                                callback(null, result.data);
+                            else
+                                callback(result);
                         } catch(err) {
                             callback({ code: 500, message: err.message });
                         }
