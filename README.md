@@ -15,16 +15,16 @@ var gator = require('gator-score');
 app.get('/test', function (req, res) {
 
     var options = {
-        accessToken: '',                    //  leave blank for free version
-        ip: req.ip,                         //  the IP address of the user
-        ua: req.headers['user-agent'],      //  the user agent of the user
-        referrer: req.headers['referer'],   //  the user's referrer
-        url: req.host                       //  the url of your site the user is on
+        accessToken: '',                    
+        ip: req.ip,
+        ua: req.headers['user-agent'],
+        referrer: req.headers['referer'],
+        url: req.host
     };
 
     gator.score(options, function(err, result) {
 
-        if (!err && result && result.score < 100) 
+        if (!err && result && result.score < 100)   //  a score less the 100 is very likely a bot
             res.render('botContent');
         else
             res.render('humanContent');
@@ -35,6 +35,17 @@ app.get('/test', function (req, res) {
 # Installation
 
     $ npm install gator-score
+
+# Options
+- `accessToken` The access token for the call that you can get from a gator.io account.  Leave this blank for the free version, which is rate limited.
+- `ip` The IP address of the user.
+- `ua` The user agent of the user.
+- `referrer` The user's referrer.
+- `url` The url of your site the user is on
+- `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website. 
+ 
+# Endpoints
+We are creating global endpoints for this API.  The API is extremely fast, however we cannot control latency on the internet.  To address this, we support colocation or replication to within your cloud provider's site.  Please [contact us](https://gator.io) to set this up.
 
 ## License
 
