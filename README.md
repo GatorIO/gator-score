@@ -64,15 +64,13 @@ __Arguments__
     * `timeout` The timeout in milliseconds to wait for a response.  Set this to a low value for a production website.
 * `callback(err, result)`
     * `err` The error object has the following format:
-        * `code` an HTTP status code.  200 means OK.  All others indicate some kind of failure.
+        * `code` an HTTP status code from the REST call.
         * `message` the associated error message.
     * `result` The user score object.
 
 ## Example result
 ```javascript
 {
-  "code": 200,                          //  the HTTP status code - 200 means OK
-  "data": {
     "score": 520,                       //  a score less than 100 indicates a very high likelyhood of a bot or an invalid user
     "offense": null,                    //  this identifies the primary reason a user has a low score (colocation, collusion, etc.)
     "organization": "Acme, Inc.",       //  the company, ISP, school or governmental agency of the user
@@ -122,7 +120,6 @@ __Arguments__
     "browserVersion": "Safari",
     "browser": "Safari",
     "status": "This result was delayed intentionally as part of the free version.  Create an account at www.gator.io for full speed access."
-  }
 }
 ```
 
