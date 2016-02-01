@@ -1,6 +1,7 @@
 {
     "name": "gator-score",
     "description": "Realtime API to get a user's fraud score, geolocation, device, demographic, search and technology data based on an IP address, user agent and referrer.",
+    "homepage": "gator.io",
     "version": "1.0.0",
     "author": {
         "name": "GatorIO"
@@ -25,6 +26,7 @@
     "keywords": [
         "user",
         "visitor",
+        "bot",
         "fraud",
         "detection",
         "geolocation",
@@ -32,16 +34,21 @@
         "search engine",
         "keywords",
         "search terms",
+        "analytics",
         "browser",
         "platform",
+        "device type",
         "device",
         "mobile",
-        "bot",
+        "tablet",
+        "desktop",
         "proxy",
         "hidden",
+        "realtime",
         "score",
         "publisher",
         "ad",
+        "advertiser",
         "content",
         "optimization"
     ],

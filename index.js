@@ -1,5 +1,5 @@
 /*!
- * gator-profile
+ * gator-score
  * MIT Licensed
  */
 
@@ -10,57 +10,97 @@
  2) The profile object
  */
 
-module.exports = function(params, callback) {
+module.exports = {
 
-    try {
+    score: function(params, callback) {
 
-        var query = '?ip=' + params.ip, path = '/v1/score';
+        try {
 
-        //  get an access token for full access at www.gator.io
-        if (params.accessToken)
-            query += 'accessToken=' + params.accessToken;
+            var aborted, timeout = 1000, protocol, query = '?ip=' + params.ip, path = '/v1/score';
 
-        if (params.ua)
-            query += '&ua=' + encodeURIComponent(params.ua);
+            //  get an access token for full access at www.gator.io
+            if (params.accessToken)
+                query += '&accessToken=' + params.accessToken;
+            else
+                timeout = 2000;     //  free version delays result, so make timeout longer
 
-        //  referrer is used to get search engine, keywords and some quality info
-        if (params.referrer)
-            query += '&referrer=' + encodeURIComponent(params.referrer);
+            if (params.ua)
+                query += '&ua=' + encodeURIComponent(params.ua);
 
-        //  the url is used to get campaign, source, medium and other query string info
-        if (params.url)
-            query += '&url=' + encodeURIComponent(params.url);
+            //  referrer is used to get search engine, keywords and some quality info
+            if (params.referrer)
+                query += '&referrer=' + encodeURIComponent(params.referrer);
 
-        const https = require('https');
+            //  the url is used to get campaign, source, medium and other query string info
+            if (params.url)
+                query += '&url=' + encodeURIComponent(params.url);
 
-        var options = {
-            hostname: 'api.gator.io',
-            port: 443,
-            path: path + query,
-            method: 'GET'
-        };
+            //  default options
+            var options = {
+                hostname: 'api.gator.io',   //  this can be changed to an endpoint geographically close to caller
+                port: 443,
+                path: path + query,
+                method: 'GET'
+            };
 
-        var req = https.request(options, function(res) {
+            if (params.timeout)
+                timeout = params.timeout;
 
-            var result = '';
+            //  allow overriding of api protocol, location and port for intranet or colocation usage
+            if (params.apiProtocol) {
 
-            res.setTimeout(100);
+                if (params.apiProtocol != 'http' && params.apiProtocol != 'https') {
+                    callback({ code: 400, message: 'protocol not supported' });
+                    return;
+                }
+                protocol = require(params.apiProtocol);
+            } else {
+                //  default to https
+                protocol = require('https');
+            }
 
-            res.on('data', function(chunk) {
-                result += chunk;
+            if (params.apiHost) {
+                options.hostname = params.apiHost;
+            }
+
+            if (params.apiPort) {
+                options.port = params.apiPort;
+            }
+
+            var req = protocol.request(options, function(res) {
+
+                var result = '';
+
+                res.on('data', function(chunk) {
+                    result += chunk;
+                });
+
+                res.on('end', function() {
+
+                    if (!aborted) {
+
+                        try {
+                            callback(null, JSON.parse(result));
+                        } catch(err) {
+                            callback({ code: 500, message: err.message });
+                        }
+                    }
+                });
             });
 
-            res.on('end', function() {
-                callback(null, JSON.parse(result));
+            req.setTimeout(timeout, function() {
+                aborted = true;
+                req.abort();
+                callback({ code: 408, message: 'Request Timeout' });
             });
-        });
-        req.end();
+            req.end();
 
-        req.on('error', function(err) {
-            callback(err);
-        });
-    } catch(err) {
-        callback(err);
+            req.on('error', function(err) {
+                if (!aborted)
+                    callback({ code: 500, message: err.message });
+            });
+        } catch(err) {
+            callback({ code: 500, message: err.message });
+        }
     }
-};
-
+}
