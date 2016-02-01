@@ -1,4 +1,4 @@
-![restify](/../gh-images/logo/png/restify_logo_black_transp_288x288.png?raw=true "restify")
+![gator-score](https://gator.io/images/logo-light-background.png "gator-score")
 
 [gator-score](https://gator.io) is a realtime API to get a user's fraud score, geolocation, device, demographic, search and technology data based on an IP address, user
 agent and referrer.
